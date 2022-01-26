@@ -9,7 +9,9 @@ Method | Path | Description
 --- | --- | ---
 PORT | 4000 | The port to listen on
 
+Specifying a port when running http-target will override an environment variable or default.
+
 ## <a name="running"></a>Running
 
 ```
-npx http-target
+npx http-target [port]
