@@ -38,7 +38,7 @@ const genericReceive = (req, res, next) => {
 }
 
 // Configure HTTP Listener...
-app.use(bodyparser.raw({ type: '*/*' }))
+app.use(bodyparser.raw({ type: '*/*', limit: '100mb' }))
 app.use(genericReceive)
 
 // Start HTTP Listener...
