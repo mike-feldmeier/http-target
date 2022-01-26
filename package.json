@@ -1,0 +1,32 @@
+{
+  "name": "http-target",
+  "description": "Simple server for testing HTTP calls",
+  "version": "1.0.0",
+  "homepage": "https://github.com/mike-feldmeier/http-target",
+  "bugs": "https://github.com/mike-feldmeier/http-target/issues",
+  "author": "Mike Feldmeier <mike.feldmeier@gmail.com> (http://www.mikefeldmeier.com)",
+  "license": "MIT",
+  "keywords": [
+    "http",
+    "stub"
+  ],
+  "main": "target.js",
+  "files": [
+    "target.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mike-feldmeier/http-target.git"
+  },
+  "scripts": {
+    "watch": "npx nodemon target.js | bunyan",
+    "start": "node target.js | bunyan"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bunyan": "^1.8.12",
+    "env-wrapper": "^1.0.4",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {}
+}
