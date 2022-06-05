@@ -3,8 +3,8 @@
 'use strict'
 
 // Require user libraries...
+const args = require('args')
 const bodyparser = require('body-parser')
-const envwrapper = require('env-wrapper')
 const express = require('express')
 
 // Know thyself...
@@ -13,15 +13,15 @@ const self = require('./package.json')
 // Create local instances...
 const app = express()
 
-// Determine default port...
+// Defaults...
 let defaultPort = 4000
-if(process.argv.length > 2) {
-  defaultPort = +process.argv[2]
-}
+let defaultReturnCode = 200
 
-// Bring in environment variables with defaults...
-envwrapper.load()
-const port = envwrapper.require('PORT', defaultPort)
+// Process command line...
+const flags = args
+  .option('port', 'The port on which to run', defaultPort)
+  .option('code', 'The HTTP code to return', defaultReturnCode)
+  .parse(process.argv)
 
 // Register process shutdown hook...
 process.on('SIGINT', () => {
@@ -33,7 +33,7 @@ process.on('SIGINT', () => {
 const genericReceive = (req, res, next) => {
   console.log(`Received HTTP ${req.method} call to "${req.path}" from ${req.ip}:`)
   console.log(req.body ? req.body.toString() : 'No body was present')
-  res.sendStatus(200)
+  res.sendStatus(flags.code)
   return true
 }
 
@@ -42,11 +42,11 @@ app.use(bodyparser.raw({ type: '*/*', limit: '100mb' }))
 app.use(genericReceive)
 
 // Start HTTP Listener...
-app.listen(port, err => {
+app.listen(flags.port, err => {
   if (err) {
-    console.error(err, `Could not start the HTTP listener on port ${port}`)
+    console.error(err, `Could not start the HTTP listener on port ${flags.port}`)
   }
   else {
-    console.log(`Successfully started the HTTP listener on port ${port}`)
+    console.log(`Successfully started the HTTP listener on port ${flags.port}.  Returning HTTP ${flags.code} to clients.`)
   }
 })

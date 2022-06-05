@@ -1,13 +1,11 @@
 {
   "name": "http-target",
   "description": "Simple server for testing HTTP calls",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "preferGlobal": true,
-
   "homepage": "https://github.com/mike-feldmeier/http-target",
   "bugs": "https://github.com/mike-feldmeier/http-target/issues",
   "author": "Mike Feldmeier <mike.feldmeier@gmail.com> (http://www.mikefeldmeier.com)",
-  
   "license": "MIT",
   "keywords": [
     "http",
@@ -25,9 +23,8 @@
     "start": "node target.js"
   },
   "dependencies": {
+    "args": "^5.0.3",
     "body-parser": "^1.18.3",
-    "env-wrapper": "^1.0.4",
     "express": "^4.16.4"
-  },
-  "devDependencies": {}
+  }
 }
